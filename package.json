@@ -1,0 +1,19 @@
+{
+  "name": "add-ons-cors",
+  "version": "1.0.0",
+  "description": "chrome add-ons CORS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "CORS"
+  ],
+  "author": "jolyzhou",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "webpack": "^1.13.2"
+  }
+}
