@@ -1,7 +1,7 @@
 /**
  * Created by jolyzhou on 2016/9/23.
  */
-/// <reference path="typings/globals/chrome/index.d.ts" />
+/// <reference path="../typings/globals/chrome/index.d.ts" />
 namespace CORS {
     export class ChangeHeaders {
         accessControlRequestHeaders: string;
@@ -75,7 +75,7 @@ namespace CORS {
             return {responseHeaders: details.responseHeaders};
         }
 
-        reload() {
+        public reload() {
             chrome.storage.local.get({'active': false, 'urls': ["<all_urls>"], 'exposedHeaders': ''}, function(result) {
 
                 this.exposedHeaders = result.exposedHeaders;
