@@ -7,19 +7,13 @@ namespace CORS {
         accessControlRequestHeaders: string;
         exposedHeaders: string;
         origin: string;
-        rule: string;
-        constructor(){
-            this.rule = 'origin';
-        }
+        constructor(){}
         private requestListener(details) {
-            console.log(`<===============Starting New Request===============>`);
-            console.log(`URL::: ${details.url}`);
-            console.log(`METHOD::: ${details.method}`);
 
             for(let key in details.requestHeaders) {
                 console.log(`==========> ${key}`);
                 console.log(details.requestHeaders[key]);
-                if(details.requestHeaders[key].name.toLowerCase() === this.rule) {
+                if(details.requestHeaders[key].name.toLowerCase() === 'origin') {
                     this.origin = details.requestHeaders[key].value;
                     break;
                 }
@@ -36,8 +30,6 @@ namespace CORS {
         }
 
         private responseListener(details) {
-            console.log(`===============>Starting Response<===============`);
-            console.log(`Response statusCode: ${details.statusCode} `);
             let flag = false,
                 alowCredentials = {
                     "name":"Access-Control-Allow-Credentials",
@@ -50,7 +42,6 @@ namespace CORS {
             details.responseHeaders.push(alowCredentials);
 
             for(let key in details.responseHeaders) {
-                console.log(details.responseHeaders[key]);
                 if(details.responseHeaders[key].name.toLowerCase() === allowOrigin.name.toLowerCase()) {
                     flag = true;
                     details.responseHeaders[key].value = allowOrigin.value;
@@ -76,40 +67,42 @@ namespace CORS {
         }
 
         public reload() {
+            const that = this;
             chrome.storage.local.get({'active': false, 'urls': ["<all_urls>"], 'exposedHeaders': ''}, function(result) {
 
-                this.exposedHeaders = result.exposedHeaders;
+                that.exposedHeaders = result.exposedHeaders;
 
                 /*Remove Listeners*/
-                chrome.webRequest.onHeadersReceived.removeListener(this.responseListener);
-                chrome.webRequest.onBeforeSendHeaders.removeListener(this.requestListener);
+                chrome.webRequest.onHeadersReceived.removeListener(that.responseListener);
+                chrome.webRequest.onBeforeSendHeaders.removeListener(that.requestListener);
 
                 if(result.active) {
-                    chrome.browserAction.setIcon({path: "on.png"});
+                    chrome.browserAction.setIcon({path: "images/on.png"});
 
                     if(result.urls.length) {
 
                         /*Add Listeners*/
-                        chrome.webRequest.onHeadersReceived.addListener(this.responseListener, {
+                        chrome.webRequest.onHeadersReceived.addListener(that.responseListener, {
                             urls: result.urls
                         },["blocking", "responseHeaders"]);
 
-                        chrome.webRequest.onBeforeSendHeaders.addListener(this.requestListener, {
+                        chrome.webRequest.onBeforeSendHeaders.addListener(that.requestListener, {
                             urls: result.urls
                         },["blocking", "requestHeaders"]);
                     }
                 } else {
-                    chrome.browserAction.setIcon({path: "off.png"});
+                    chrome.browserAction.setIcon({path: "images/off.png"});
                 }
             });
         }
 
-        corsinit() {
+        public corsinit() {
+            const that = this;
             chrome.runtime.onInstalled.addListener(function(){
                 chrome.storage.local.set({'active': false});
                 chrome.storage.local.set({'urls': ["<all_urls>"]});
                 chrome.storage.local.set({'exposedHeaders': ''});
-                this.reload();
+                that.reload();
             });
         }
     }

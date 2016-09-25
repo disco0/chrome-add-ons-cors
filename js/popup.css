@@ -1,0 +1,18 @@
+.setting {
+    background-color: darkslategray;
+    border-radius: 20px;
+    font-size: 18px;
+    color: #b5d592;
+    text-align: center;
+    line-height: 50px;
+    height: 50px;
+    width: 200px;
+}
+
+.buttons {
+    background-color: #004974;
+    border-radius: 15px;
+    color: #99D3F5;
+    height: 30px;
+    width: 200px;
+}
