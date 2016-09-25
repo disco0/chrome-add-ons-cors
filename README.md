@@ -4,6 +4,7 @@
 ## development
 ```
 $ npm install
+$ webpack
 $ tsc
 ```
 #### then you can import the CORS add-ons project to the chrome 

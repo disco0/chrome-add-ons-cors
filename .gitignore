@@ -4,3 +4,6 @@
 node_modules/
 
 typings/
+
+bundle.js
+js/background.js
