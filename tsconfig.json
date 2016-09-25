@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "outFile": "./js/background.js"
+  },
+  "files": ["./ts/background.ts"]
+}
