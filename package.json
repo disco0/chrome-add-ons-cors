@@ -6,8 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jolyzhou/chrome-add-ons-cors.git"
+  },
   "keywords": [
-    "CORS"
+    "CORS chrome add-ons react typescript"
   ],
   "author": "jolyzhou",
   "license": "MIT",
