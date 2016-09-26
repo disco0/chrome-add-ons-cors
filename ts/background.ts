@@ -11,8 +11,6 @@ namespace CORS {
         private requestListener(details) {
 
             for(let key in details.requestHeaders) {
-                console.log(`==========> ${key}`);
-                console.log(details.requestHeaders[key]);
                 if(details.requestHeaders[key].name.toLowerCase() === 'origin') {
                     this.origin = details.requestHeaders[key].value;
                     break;
