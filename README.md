@@ -1,5 +1,5 @@
 # chrome add-ons CORS
-##### Cross-origin resource sharin add-ons of chrome
+##### Cross-origin resource sharing add-ons of chrome
 
 ## development
 ```
